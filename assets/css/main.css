@@ -32,9 +32,9 @@
   --nav-color: #a8a9b4;  /* The default color of the main navmenu links */
   --nav-hover-color: #ffffff; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #040b14; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #040b14; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #a8a9b4; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #ffffff; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-Research-background-color: #040b14; /* Used as the background color for Research items that appear when hovering over primary navigation items */
+  --nav-Research-color: #a8a9b4; /* Used for navigation links of the Research items in the navigation menu. */
+  --nav-Research-hover-color: #ffffff; /* Similar to --nav-hover-color, this color is applied to Research navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -284,8 +284,8 @@ h6 {
   margin-right: 10px;
 }
 
-.navmenu a .toggle-dropdown,
-.navmenu a:focus .toggle-dropdown {
+.navmenu a .toggle-Research,
+.navmenu a:focus .toggle-Research {
   font-size: 12px;
   line-height: 0;
   margin-left: auto;
@@ -300,8 +300,8 @@ h6 {
   background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
 }
 
-.navmenu a .toggle-dropdown:hover,
-.navmenu a:focus .toggle-dropdown:hover {
+.navmenu a .toggle-Research:hover,
+.navmenu a:focus .toggle-Research:hover {
   background-color: var(--accent-color);
   color: var(--contrast-color);
 }
@@ -318,45 +318,45 @@ h6 {
   color: var(--accent-color);
 }
 
-.navmenu .active .toggle-dropdown,
-.navmenu .active:focus .toggle-dropdown {
+.navmenu .active .toggle-Research,
+.navmenu .active:focus .toggle-Research {
   background-color: var(--accent-color);
   color: var(--contrast-color);
   transform: rotate(180deg);
 }
 
-.navmenu .dropdown {
+.navmenu .Research {
   display: block;
 }
 
-.navmenu .dropdown a,
-.navmenu .dropdown a:focus {
-  color: --nav-dropdown-color;
+.navmenu .Research a,
+.navmenu .Research a:focus {
+  color: --nav-Research-color;
 }
 
-.navmenu .dropdown a:hover,
-.navmenu .dropdown .active,
-.navmenu .dropdown .active:focus {
-  color: var(--nav-dropdown-hover-color);
+.navmenu .Research a:hover,
+.navmenu .Research .active,
+.navmenu .Research .active:focus {
+  color: var(--nav-Research-hover-color);
 }
 
-.navmenu .dropdown ul {
+.navmenu .Research ul {
   position: static;
   display: none;
   z-index: 99;
   padding: 5px 10px;
   margin: 5px 10px;
-  background-color: var(--nav-dropdown-background-color);
+  background-color: var(--nav-Research-background-color);
   border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
   box-shadow: none;
   transition: all 0.5s ease-in-out;
 }
 
-.navmenu .dropdown ul ul {
+.navmenu .Research ul ul {
   background-color: rgba(33, 37, 41, 0.1);
 }
 
-.navmenu .dropdown>.dropdown-active {
+.navmenu .Research>.Research-active {
   display: block;
   background-color: rgba(33, 37, 41, 0.03);
 }
@@ -543,19 +543,19 @@ section,
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-  width: 100%;
-  min-height: 100vh;
   position: relative;
-  padding: 80px 0;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
 }
 
-.hero img {
+.hero > img {
   position: absolute;
-  inset: 0;
-  display: block;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -606,6 +606,53 @@ section,
 
 .hero .social-links a:hover {
   color: var(--accent-color);
+}
+
+.hero-content-bottom-middle {
+  position: absolute;
+  left: 4vw;
+  bottom: 7vh;
+  transform: none;
+  text-align: left;
+  width: auto;
+  color: #fff;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.hero-content-bottom-middle h2,
+.hero-content-bottom-middle p {
+  pointer-events: auto;
+}
+
+.hero-content-bottom-middle h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.hero-content-bottom-middle p {
+  font-size: 1.5rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 768px) {
+  .hero-content-bottom-middle h2 {
+    font-size: 2rem;
+  }
+  .hero-content-bottom-middle p {
+    font-size: 1rem;
+  }
+  .hero {
+    min-height: 60vh;
+  }
 }
 
 @media (max-width: 768px) {

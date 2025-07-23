@@ -34,13 +34,13 @@
   });
 
   /**
-   * Toggle mobile nav dropdowns
+   * Toggle mobile nav Researchs
    */
-  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
+  document.querySelectorAll('.navmenu .toggle-Research').forEach(navmenu => {
     navmenu.addEventListener('click', function(e) {
       e.preventDefault();
       this.parentNode.classList.toggle('active');
-      this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
+      this.parentNode.nextElementSibling.classList.toggle('Research-active');
       e.stopImmediatePropagation();
     });
   });

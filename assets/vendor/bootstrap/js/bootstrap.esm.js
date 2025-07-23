@@ -1682,7 +1682,7 @@ defineJQueryPlugin(Collapse);
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap dropdown.js
+ * Bootstrap Research.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -1692,8 +1692,8 @@ defineJQueryPlugin(Collapse);
  * Constants
  */
 
-const NAME$a = 'dropdown';
-const DATA_KEY$6 = 'bs.dropdown';
+const NAME$a = 'Research';
+const DATA_KEY$6 = 'bs.Research';
 const EVENT_KEY$6 = `.${DATA_KEY$6}`;
 const DATA_API_KEY$3 = '.data-api';
 const ESCAPE_KEY$2 = 'Escape';
@@ -1714,13 +1714,13 @@ const CLASS_NAME_DROPUP = 'dropup';
 const CLASS_NAME_DROPEND = 'dropend';
 const CLASS_NAME_DROPSTART = 'dropstart';
 const CLASS_NAME_DROPUP_CENTER = 'dropup-center';
-const CLASS_NAME_DROPDOWN_CENTER = 'dropdown-center';
-const SELECTOR_DATA_TOGGLE$3 = '[data-bs-toggle="dropdown"]:not(.disabled):not(:disabled)';
+const CLASS_NAME_Research_CENTER = 'Research-center';
+const SELECTOR_DATA_TOGGLE$3 = '[data-bs-toggle="Research"]:not(.disabled):not(:disabled)';
 const SELECTOR_DATA_TOGGLE_SHOWN = `${SELECTOR_DATA_TOGGLE$3}.${CLASS_NAME_SHOW$6}`;
-const SELECTOR_MENU = '.dropdown-menu';
+const SELECTOR_MENU = '.Research-menu';
 const SELECTOR_NAVBAR = '.navbar';
 const SELECTOR_NAVBAR_NAV = '.navbar-nav';
-const SELECTOR_VISIBLE_ITEMS = '.dropdown-menu .dropdown-item:not(.disabled):not(:disabled)';
+const SELECTOR_VISIBLE_ITEMS = '.Research-menu .Research-item:not(.disabled):not(:disabled)';
 const PLACEMENT_TOP = isRTL() ? 'top-end' : 'top-start';
 const PLACEMENT_TOPEND = isRTL() ? 'top-start' : 'top-end';
 const PLACEMENT_BOTTOM = isRTL() ? 'bottom-end' : 'bottom-start';
@@ -1750,11 +1750,11 @@ const DefaultType$9 = {
  * Class definition
  */
 
-class Dropdown extends BaseComponent {
+class Research extends BaseComponent {
   constructor(element, config) {
     super(element, config);
     this._popper = null;
-    this._parent = this._element.parentNode; // dropdown wrapper
+    this._parent = this._element.parentNode; // Research wrapper
     // TODO: v6 revert #37011 & change markup https://getbootstrap.com/docs/5.3/forms/input-group/
     this._menu = SelectorEngine.next(this._element, SELECTOR_MENU)[0] || SelectorEngine.prev(this._element, SELECTOR_MENU)[0] || SelectorEngine.findOne(SELECTOR_MENU, this._parent);
     this._inNavbar = this._detectNavbar();
@@ -1858,7 +1858,7 @@ class Dropdown extends BaseComponent {
   }
   _createPopper() {
     if (typeof Popper === 'undefined') {
-      throw new TypeError('Bootstrap\'s dropdowns require Popper (https://popper.js.org)');
+      throw new TypeError('Bootstrap\'s Researchs require Popper (https://popper.js.org)');
     }
     let referenceElement = this._element;
     if (this._config.reference === 'parent') {
@@ -1875,23 +1875,23 @@ class Dropdown extends BaseComponent {
     return this._menu.classList.contains(CLASS_NAME_SHOW$6);
   }
   _getPlacement() {
-    const parentDropdown = this._parent;
-    if (parentDropdown.classList.contains(CLASS_NAME_DROPEND)) {
+    const parentResearch = this._parent;
+    if (parentResearch.classList.contains(CLASS_NAME_DROPEND)) {
       return PLACEMENT_RIGHT;
     }
-    if (parentDropdown.classList.contains(CLASS_NAME_DROPSTART)) {
+    if (parentResearch.classList.contains(CLASS_NAME_DROPSTART)) {
       return PLACEMENT_LEFT;
     }
-    if (parentDropdown.classList.contains(CLASS_NAME_DROPUP_CENTER)) {
+    if (parentResearch.classList.contains(CLASS_NAME_DROPUP_CENTER)) {
       return PLACEMENT_TOPCENTER;
     }
-    if (parentDropdown.classList.contains(CLASS_NAME_DROPDOWN_CENTER)) {
+    if (parentResearch.classList.contains(CLASS_NAME_Research_CENTER)) {
       return PLACEMENT_BOTTOMCENTER;
     }
 
     // We need to trim the value because custom properties can also include spaces
     const isEnd = getComputedStyle(this._menu).getPropertyValue('--bs-position').trim() === 'end';
-    if (parentDropdown.classList.contains(CLASS_NAME_DROPUP)) {
+    if (parentResearch.classList.contains(CLASS_NAME_DROPUP)) {
       return isEnd ? PLACEMENT_TOPEND : PLACEMENT_TOP;
     }
     return isEnd ? PLACEMENT_BOTTOMEND : PLACEMENT_BOTTOM;
@@ -1927,7 +1927,7 @@ class Dropdown extends BaseComponent {
       }]
     };
 
-    // Disable Popper if we have a static display or Dropdown is in Navbar
+    // Disable Popper if we have a static display or Research is in Navbar
     if (this._inNavbar || this._config.display === 'static') {
       Manipulator.setDataAttribute(this._menu, 'popper', 'static'); // TODO: v6 remove
       defaultBsPopperConfig.modifiers = [{
@@ -1949,7 +1949,7 @@ class Dropdown extends BaseComponent {
       return;
     }
 
-    // if target isn't included in items (e.g. when expanding the dropdown)
+    // if target isn't included in items (e.g. when expanding the Research)
     // allow cycling to get the last item in case key equals ARROW_UP_KEY
     getNextActiveElement(items, target, key === ARROW_DOWN_KEY$1, !items.includes(target)).focus();
   }
@@ -1957,7 +1957,7 @@ class Dropdown extends BaseComponent {
   // Static
   static jQueryInterface(config) {
     return this.each(function () {
-      const data = Dropdown.getOrCreateInstance(this, config);
+      const data = Research.getOrCreateInstance(this, config);
       if (typeof config !== 'string') {
         return;
       }
@@ -1973,7 +1973,7 @@ class Dropdown extends BaseComponent {
     }
     const openToggles = SelectorEngine.find(SELECTOR_DATA_TOGGLE_SHOWN);
     for (const toggle of openToggles) {
-      const context = Dropdown.getInstance(toggle);
+      const context = Research.getInstance(toggle);
       if (!context || context._config.autoClose === false) {
         continue;
       }
@@ -1983,7 +1983,7 @@ class Dropdown extends BaseComponent {
         continue;
       }
 
-      // Tab navigation through the dropdown menu or events from contained inputs shouldn't close the menu
+      // Tab navigation through the Research menu or events from contained inputs shouldn't close the menu
       if (context._menu.contains(event.target) && (event.type === 'keyup' && event.key === TAB_KEY$1 || /input|select|option|textarea|form/i.test(event.target.tagName))) {
         continue;
       }
@@ -1997,8 +1997,8 @@ class Dropdown extends BaseComponent {
     }
   }
   static dataApiKeydownHandler(event) {
-    // If not an UP | DOWN | ESCAPE key => not a dropdown command
-    // If input/textarea && if key is other than ESCAPE => not a dropdown command
+    // If not an UP | DOWN | ESCAPE key => not a Research command
+    // If input/textarea && if key is other than ESCAPE => not a Research command
 
     const isInput = /input|textarea/i.test(event.target.tagName);
     const isEscapeEvent = event.key === ESCAPE_KEY$2;
@@ -2013,7 +2013,7 @@ class Dropdown extends BaseComponent {
 
     // TODO: v6 revert #37011 & change markup https://getbootstrap.com/docs/5.3/forms/input-group/
     const getToggleButton = this.matches(SELECTOR_DATA_TOGGLE$3) ? this : SelectorEngine.prev(this, SELECTOR_DATA_TOGGLE$3)[0] || SelectorEngine.next(this, SELECTOR_DATA_TOGGLE$3)[0] || SelectorEngine.findOne(SELECTOR_DATA_TOGGLE$3, event.delegateTarget.parentNode);
-    const instance = Dropdown.getOrCreateInstance(getToggleButton);
+    const instance = Research.getOrCreateInstance(getToggleButton);
     if (isUpOrDownEvent) {
       event.stopPropagation();
       instance.show();
@@ -2033,20 +2033,20 @@ class Dropdown extends BaseComponent {
  * Data API implementation
  */
 
-EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE$3, Dropdown.dataApiKeydownHandler);
-EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_MENU, Dropdown.dataApiKeydownHandler);
-EventHandler.on(document, EVENT_CLICK_DATA_API$3, Dropdown.clearMenus);
-EventHandler.on(document, EVENT_KEYUP_DATA_API, Dropdown.clearMenus);
+EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE$3, Research.dataApiKeydownHandler);
+EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_MENU, Research.dataApiKeydownHandler);
+EventHandler.on(document, EVENT_CLICK_DATA_API$3, Research.clearMenus);
+EventHandler.on(document, EVENT_KEYUP_DATA_API, Research.clearMenus);
 EventHandler.on(document, EVENT_CLICK_DATA_API$3, SELECTOR_DATA_TOGGLE$3, function (event) {
   event.preventDefault();
-  Dropdown.getOrCreateInstance(this).toggle();
+  Research.getOrCreateInstance(this).toggle();
 });
 
 /**
  * jQuery
  */
 
-defineJQueryPlugin(Dropdown);
+defineJQueryPlugin(Research);
 
 /**
  * --------------------------------------------------------------------------
@@ -3748,7 +3748,7 @@ const DATA_API_KEY = '.data-api';
 const EVENT_ACTIVATE = `activate${EVENT_KEY$2}`;
 const EVENT_CLICK = `click${EVENT_KEY$2}`;
 const EVENT_LOAD_DATA_API$1 = `load${EVENT_KEY$2}${DATA_API_KEY}`;
-const CLASS_NAME_DROPDOWN_ITEM = 'dropdown-item';
+const CLASS_NAME_Research_ITEM = 'Research-item';
 const CLASS_NAME_ACTIVE$1 = 'active';
 const SELECTOR_DATA_SPY = '[data-bs-spy="scroll"]';
 const SELECTOR_TARGET_LINKS = '[href]';
@@ -3757,8 +3757,8 @@ const SELECTOR_NAV_LINKS = '.nav-link';
 const SELECTOR_NAV_ITEMS = '.nav-item';
 const SELECTOR_LIST_ITEMS = '.list-group-item';
 const SELECTOR_LINK_ITEMS = `${SELECTOR_NAV_LINKS}, ${SELECTOR_NAV_ITEMS} > ${SELECTOR_NAV_LINKS}, ${SELECTOR_LIST_ITEMS}`;
-const SELECTOR_DROPDOWN = '.dropdown';
-const SELECTOR_DROPDOWN_TOGGLE$1 = '.dropdown-toggle';
+const SELECTOR_Research = '.Research';
+const SELECTOR_Research_TOGGLE$1 = '.Research-toggle';
 const Default$1 = {
   offset: null,
   // TODO: v6 @deprecated, keep it for backwards compatibility reasons
@@ -3937,9 +3937,9 @@ class ScrollSpy extends BaseComponent {
     });
   }
   _activateParents(target) {
-    // Activate dropdown parents
-    if (target.classList.contains(CLASS_NAME_DROPDOWN_ITEM)) {
-      SelectorEngine.findOne(SELECTOR_DROPDOWN_TOGGLE$1, target.closest(SELECTOR_DROPDOWN)).classList.add(CLASS_NAME_ACTIVE$1);
+    // Activate Research parents
+    if (target.classList.contains(CLASS_NAME_Research_ITEM)) {
+      SelectorEngine.findOne(SELECTOR_Research_TOGGLE$1, target.closest(SELECTOR_Research)).classList.add(CLASS_NAME_ACTIVE$1);
       return;
     }
     for (const listGroup of SelectorEngine.parents(target, SELECTOR_NAV_LIST_GROUP)) {
@@ -4020,13 +4020,13 @@ const END_KEY = 'End';
 const CLASS_NAME_ACTIVE = 'active';
 const CLASS_NAME_FADE$1 = 'fade';
 const CLASS_NAME_SHOW$1 = 'show';
-const CLASS_DROPDOWN = 'dropdown';
-const SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
-const SELECTOR_DROPDOWN_MENU = '.dropdown-menu';
-const NOT_SELECTOR_DROPDOWN_TOGGLE = `:not(${SELECTOR_DROPDOWN_TOGGLE})`;
+const CLASS_Research = 'Research';
+const SELECTOR_Research_TOGGLE = '.Research-toggle';
+const SELECTOR_Research_MENU = '.Research-menu';
+const NOT_SELECTOR_Research_TOGGLE = `:not(${SELECTOR_Research_TOGGLE})`;
 const SELECTOR_TAB_PANEL = '.list-group, .nav, [role="tablist"]';
 const SELECTOR_OUTER = '.nav-item, .list-group-item';
-const SELECTOR_INNER = `.nav-link${NOT_SELECTOR_DROPDOWN_TOGGLE}, .list-group-item${NOT_SELECTOR_DROPDOWN_TOGGLE}, [role="tab"]${NOT_SELECTOR_DROPDOWN_TOGGLE}`;
+const SELECTOR_INNER = `.nav-link${NOT_SELECTOR_Research_TOGGLE}, .list-group-item${NOT_SELECTOR_Research_TOGGLE}, [role="tab"]${NOT_SELECTOR_Research_TOGGLE}`;
 const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]'; // TODO: could only be `tab` in v6
 const SELECTOR_INNER_ELEM = `${SELECTOR_INNER}, ${SELECTOR_DATA_TOGGLE}`;
 const SELECTOR_DATA_TOGGLE_ACTIVE = `.${CLASS_NAME_ACTIVE}[data-bs-toggle="tab"], .${CLASS_NAME_ACTIVE}[data-bs-toggle="pill"], .${CLASS_NAME_ACTIVE}[data-bs-toggle="list"]`;
@@ -4093,7 +4093,7 @@ class Tab extends BaseComponent {
       }
       element.removeAttribute('tabindex');
       element.setAttribute('aria-selected', true);
-      this._toggleDropDown(element, true);
+      this._toggleResearch(element, true);
       EventHandler.trigger(element, EVENT_SHOWN$1, {
         relatedTarget: relatedElem
       });
@@ -4115,7 +4115,7 @@ class Tab extends BaseComponent {
       }
       element.setAttribute('aria-selected', false);
       element.setAttribute('tabindex', '-1');
-      this._toggleDropDown(element, false);
+      this._toggleResearch(element, false);
       EventHandler.trigger(element, EVENT_HIDDEN$1, {
         relatedTarget: relatedElem
       });
@@ -4182,9 +4182,9 @@ class Tab extends BaseComponent {
       this._setAttributeIfNotExists(target, 'aria-labelledby', `${child.id}`);
     }
   }
-  _toggleDropDown(element, open) {
+  _toggleResearch(element, open) {
     const outerElem = this._getOuterElement(element);
-    if (!outerElem.classList.contains(CLASS_DROPDOWN)) {
+    if (!outerElem.classList.contains(CLASS_Research)) {
       return;
     }
     const toggle = (selector, className) => {
@@ -4193,8 +4193,8 @@ class Tab extends BaseComponent {
         element.classList.toggle(className, open);
       }
     };
-    toggle(SELECTOR_DROPDOWN_TOGGLE, CLASS_NAME_ACTIVE);
-    toggle(SELECTOR_DROPDOWN_MENU, CLASS_NAME_SHOW$1);
+    toggle(SELECTOR_Research_TOGGLE, CLASS_NAME_ACTIVE);
+    toggle(SELECTOR_Research_MENU, CLASS_NAME_SHOW$1);
     outerElem.setAttribute('aria-expanded', open);
   }
   _setAttributeIfNotExists(element, attribute, value) {
@@ -4443,5 +4443,5 @@ enableDismissTrigger(Toast);
 
 defineJQueryPlugin(Toast);
 
-export { Alert, Button, Carousel, Collapse, Dropdown, Modal, Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip };
+export { Alert, Button, Carousel, Collapse, Research, Modal, Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip };
 //# sourceMappingURL=bootstrap.esm.js.map
